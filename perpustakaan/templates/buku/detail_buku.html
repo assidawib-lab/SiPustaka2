@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Detail Buku - Sipustaka{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex items-center space-x-4">
+    <a href="{% url 'list_buku' %}" class="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-sm border border-gray-100 hover:bg-gray-50 transition text-gray-500">
+        ←
+    </a>
+    <div>
+        <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Kelola Buku</p>
+        <h2 class="text-2xl font-bold text-gray-800">Detail Buku</h2>
+    </div>
+</div>
+
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 max-w-4xl">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <div class="bg-gray-50/80 rounded-xl p-5 border border-gray-100">
+            <p class="text-xs text-gray-400 font-bold uppercase tracking-wide">Judul Buku</p>
+            <p class="text-lg font-bold text-gray-800 mt-1">{{ buku.judul }}</p>
+        </div>
+
+        <div class="bg-gray-50/80 rounded-xl p-5 border border-gray-100">
+            <p class="text-xs text-gray-400 font-bold uppercase tracking-wide">Pengarang</p>
+            <p class="text-lg font-bold text-gray-800 mt-1">{{ buku.pengarang }}</p>
+        </div>
+
+        <div class="bg-gray-50/80 rounded-xl p-5 border border-gray-100">
+            <p class="text-xs text-gray-400 font-bold uppercase tracking-wide">Kategori</p>
+            <p class="text-lg font-bold text-gray-800 mt-1">{{ buku.kategori }}</p>
+        </div>
+
+        <div class="bg-gray-50/80 rounded-xl p-5 border border-gray-100">
+            <p class="text-xs text-gray-400 font-bold uppercase tracking-wide">Penerbit</p>
+            <p class="text-lg font-bold text-gray-800 mt-1">{{ buku.penerbit }}</p>
+        </div>
+
+        <div class="bg-gray-50/80 rounded-xl p-5 border border-gray-100">
+            <p class="text-xs text-gray-400 font-bold uppercase tracking-wide">Tahun Terbit & Rak</p>
+            <p class="text-lg font-bold text-gray-800 mt-1">{{ buku.tahun_terbit }} <span class="text-gray-300 mx-2">|</span> {{ buku.rak }}</p>
+        </div>
+
+        <div class="bg-gray-50/80 rounded-xl p-5 border border-gray-100">
+            <p class="text-xs text-gray-400 font-bold uppercase tracking-wide">Sisa Stok</p>
+            <p class="text-lg font-bold text-blue-600 mt-1">{{ buku.stok }} Unit</p>
+        </div>
+
+        <div class="bg-gray-50/80 rounded-xl p-5 border border-gray-100 md:col-span-2">
+            <p class="text-xs text-gray-400 font-bold uppercase tracking-wide">Deskripsi</p>
+            <p class="text-base text-gray-700 mt-2 leading-relaxed">{{ buku.deskripsi }}</p>
+        </div>
+
+    </div>
+
+    <div class="mt-8 flex space-x-4">
+        <a href="{% url 'edit_buku' buku.id %}" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-lg font-medium transition">Edit Data Buku</a>
+    </div>
+</div>
+{% endblock content %}

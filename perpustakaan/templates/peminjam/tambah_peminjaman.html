@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Tambah Peminjaman - Sipustaka{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex items-center space-x-4">
+    <a href="{% url 'list_peminjaman' %}" class="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-sm border border-gray-100 hover:bg-gray-50 transition text-gray-500">
+        ←
+    </a>
+    <div>
+        <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Kelola Transaksi</p>
+        <h2 class="text-2xl font-bold text-gray-800">Form Peminjaman Baru</h2>
+    </div>
+</div>
+
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 max-w-4xl">
+    <form method="POST" action="" class="space-y-6">
+        {% csrf_token %}
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Pilih Siswa (User Aktif)</label>
+                <div class="relative">
+                    <select name="siswa_id" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-gray-50 hover:bg-white appearance-none cursor-pointer">
+                        <option value="" disabled selected>-- Cari Nama Siswa --</option>
+                        {% for s in siswa_list %}
+                            <option value="{{ s.id }}">{{ s.nama }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Pilih Buku (Stok Tersedia)</label>
+                <div class="relative">
+                    <select name="buku_id" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-gray-50 hover:bg-white appearance-none cursor-pointer">
+                        <option value="" disabled selected>-- Cari Judul Buku --</option>
+                        {% for b in buku_list %}
+                            <option value="{{ b.id }}">{{ b.judul }} (Sisa: {{ b.stok }} Unit)</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Tanggal Pinjam</label>
+                <input type="date" name="tanggal_pinjam" required 
+                       class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-gray-50 hover:bg-white text-gray-700">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Tenggat Waktu / Jatuh Tempo</label>
+                <input type="date" name="jatuh_tempo" required 
+                       class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-gray-50 hover:bg-white text-gray-700">
+            </div>
+
+            <div class="md:col-span-2">
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Keperluan Peminjaman (Opsional)</label>
+                <textarea name="keperluan" rows="3" placeholder="Contoh: Tugas makalah sejarah..." 
+                          class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-gray-50 hover:bg-white"></textarea>
+            </div>
+
+            <div class="md:col-span-2">
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Status Awal</label>
+                <select name="status" required class="w-full md:w-1/2 px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-gray-50 hover:bg-white appearance-none cursor-pointer">
+                    <option value="Dipinjam" selected>Dipinjam (Berjalan)</option>
+                    <option value="Dikembalikan">Langsung Dikembalikan</option>
+                </select>
+                <p class="text-xs text-amber-600 mt-2 font-medium">⚠️ Menyimpan data dengan status "Dipinjam" akan otomatis mengurangi 1 stok buku.</p>
+            </div>
+        </div>
+
+        <div class="pt-4 border-t border-gray-100 flex items-center space-x-4">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition shadow-sm">
+                Simpan Transaksi
+            </button>
+            <a href="{% url 'list_peminjaman' %}" class="text-gray-500 hover:text-gray-800 font-medium transition">Batal</a>
+        </div>
+    </form>
+</div>
+{% endblock content %}

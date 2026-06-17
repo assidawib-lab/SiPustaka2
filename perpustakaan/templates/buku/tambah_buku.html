@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}Tambah Buku - Sipustaka{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex items-center space-x-4">
+    <a href="{% url 'list_buku' %}" class="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-sm border border-gray-100 hover:bg-gray-50 transition text-gray-500">
+        ←
+    </a>
+    <div>
+        <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Kelola Buku</p>
+        <h2 class="text-2xl font-bold text-gray-800">Tambah Buku Baru</h2>
+    </div>
+</div>
+
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 max-w-4xl">
+    <form method="POST" action="" class="space-y-6">
+        {% csrf_token %}
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Judul Buku</label>
+                <input type="text" name="judul" placeholder="Masukkan judul lengkap buku" required 
+                       class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-gray-50 hover:bg-white">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Pengarang</label>
+                <input type="text" name="pengarang" placeholder="Nama penulis / pengarang" required 
+                       class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-gray-50 hover:bg-white">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Kategori Buku</label>
+                <div class="relative">
+                    <select name="kategori" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-gray-50 hover:bg-white appearance-none cursor-pointer">
+                        <option value="" disabled selected>-- Pilih Kategori --</option>
+                        <option value="Novel">Novel</option>
+                        <option value="Sejarah">Sejarah</option>
+                        <option value="Pendidikan">Pendidikan</option>
+                        <option value="Komik">Komik</option>
+                        <option value="Self-Improvement">Self-Improvement</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                        ▼
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Penerbit</label>
+                <input type="text" name="penerbit" placeholder="Nama perusahaan penerbit" required 
+                       class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-gray-50 hover:bg-white">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Tahun Terbit</label>
+                <input type="number" name="tahun_terbit" placeholder="Contoh: 2024" required 
+                       class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-gray-50 hover:bg-white">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Lokasi Rak Penempatan</label>
+                <div class="relative">
+                    <select name="rak" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-gray-50 hover:bg-white appearance-none cursor-pointer">
+                        <option value="" disabled selected>-- Pilih Lokasi Rak --</option>
+                        <option value="Rak A-01">Rak A-01</option>
+                        <option value="Rak A-02">Rak A-02</option>
+                        <option value="Rak A-03">Rak A-03</option>
+                        <option value="Rak A-04">Rak A-04</option>
+                        <option value="Rak A-05">Rak A-05</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                        ▼
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2">
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Jumlah Stok Buku (Unit)</label>
+                <input type="number" name="stok" placeholder="Contoh: 10" required 
+                       class="w-full md:w-1/2 px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-gray-50 hover:bg-white">
+            </div>
+
+            <div class="md:col-span-2">
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Deskripsi / Sinopsis Buku</label>
+                <textarea name="deskripsi" rows="4" placeholder="Tuliskan deskripsi singkat mengenai buku ini..." 
+                          class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-gray-50 hover:bg-white"></textarea>
+            </div>
+        </div>
+
+        <div class="pt-4 border-t border-gray-100 flex items-center space-x-4">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition shadow-sm">
+                + Tambahkan Buku
+            </button>
+            <a href="{% url 'list_buku' %}" class="text-gray-500 hover:text-gray-800 font-medium transition">Batal</a>
+        </div>
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Ubah Status - Sipustaka{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex items-center space-x-4">
+    <a href="{% url 'list_peminjaman' %}" class="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-sm border border-gray-100 hover:bg-gray-50 transition text-gray-500">
+        ←
+    </a>
+    <div>
+        <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Kelola Transaksi</p>
+        <h2 class="text-2xl font-bold text-gray-800">Ubah Status Pengembalian</h2>
+    </div>
+</div>
+
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 max-w-xl">
+    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded-r-lg">
+        <p class="text-sm text-blue-800 font-medium">Transaksi ID: <strong>#{{ peminjaman.id }}</strong></p>
+        <p class="text-xs text-blue-600 mt-1">Mengubah status ke "Dikembalikan" akan otomatis menambahkan kembali stok buku di database.</p>
+    </div>
+
+    <form method="POST" action="" class="space-y-6">
+        {% csrf_token %}
+        
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Pilih Status Terbaru</label>
+            <div class="relative">
+                <select name="status" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-gray-50 hover:bg-white appearance-none cursor-pointer">
+                    <option value="Dipinjam" {% if peminjaman.status == 'Dipinjam' %}selected{% endif %}>⏳ Sedang Dipinjam</option>
+                    <option value="Dikembalikan" {% if peminjaman.status == 'Dikembalikan' %}selected{% endif %}>✅ Telah Dikembalikan</option>
+                    <option value="Terlambat" {% if peminjaman.status == 'Terlambat' %}selected{% endif %}>🚨 Terlambat (Melewati Jatuh Tempo)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="pt-4 flex items-center space-x-4">
+            <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-lg font-medium transition shadow-sm">
+                Update Status
+            </button>
+            <a href="{% url 'list_peminjaman' %}" class="text-gray-500 hover:text-gray-800 font-medium transition">Batal</a>
+        </div>
+    </form>
+</div>
+{% endblock content %}

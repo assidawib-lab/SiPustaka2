@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Sipustaka{% endblock %}
+
+{% block content %}
+<div class="mb-8">
+    <h2 class="text-2xl font-bold text-gray-800">Ringkasan Sistem</h2>
+    <p class="text-gray-500 text-sm mt-1">Pantau statistik perpustakaan Anda secara real-time.</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between">
+        <div class="flex justify-between items-start">
+            <p class="text-gray-500 text-sm font-medium">Total Stok Buku</p>
+            <span class="text-blue-500 bg-blue-50 p-2 rounded-lg">📚</span>
+        </div>
+        <h3 class="text-4xl font-bold text-gray-800 mt-4">{{ total_buku }}</h3>
+        <p class="text-xs text-gray-400 mt-2">Keseluruhan unit buku tersedia.</p>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between">
+        <div class="flex justify-between items-start">
+            <p class="text-gray-500 text-sm font-medium">Total Judul</p>
+            <span class="text-blue-500 bg-blue-50 p-2 rounded-lg">🔖</span>
+        </div>
+        <h3 class="text-4xl font-bold text-gray-800 mt-4">{{ total_judul }}</h3>
+        <p class="text-xs text-gray-400 mt-2">Jumlah koleksi judul buku.</p>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between">
+        <div class="flex justify-between items-start">
+            <p class="text-gray-500 text-sm font-medium">Sedang Dipinjam</p>
+            <span class="text-amber-500 bg-amber-50 p-2 rounded-lg">⏳</span>
+        </div>
+        <h3 class="text-4xl font-bold text-gray-800 mt-4">{{ sedang_dipinjam }}</h3>
+        <p class="text-xs text-gray-400 mt-2">Transaksi peminjaman aktif.</p>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between">
+        <div class="flex justify-between items-start">
+            <p class="text-gray-500 text-sm font-medium">Sudah Dikembalikan</p>
+            <span class="text-emerald-500 bg-emerald-50 p-2 rounded-lg">✅</span>
+        </div>
+        <h3 class="text-4xl font-bold text-gray-800 mt-4">{{ sudah_dikembalikan }}</h3>
+        <p class="text-xs text-gray-400 mt-2">Transaksi yang sudah selesai.</p>
+    </div>
+
+</div>
+{% endblock content %}

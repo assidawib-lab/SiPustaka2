@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistem Peminjaman Buku{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 flex h-screen overflow-hidden">
+
+    <aside class="w-64 bg-[#0a1128] text-white flex flex-col justify-between h-full">
+        <div>
+            <div class="p-6 flex items-center space-x-3">
+                <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center font-bold text-lg">P</div>
+                <div>
+                    <p class="text-xs text-gray-400 tracking-wider">SIPUSTAKA</p>
+                    <h1 class="font-semibold leading-tight">Sistem Peminjaman<br>Buku</h1>
+                </div>
+            </div>
+
+            <nav class="mt-6 px-4 space-y-2">
+                <a href="/" class="flex items-center space-x-3 px-4 py-3 rounded-lg transition font-medium {% if request.path == '/' %}bg-white/10 text-white{% else %}text-gray-400 hover:text-white hover:bg-white/5{% endif %}">
+                    <span>🏠</span> <span>Dashboard</span>
+                </a>
+                
+                <a href="/buku/" class="flex items-center space-x-3 px-4 py-3 rounded-lg transition font-medium {% if '/buku/' in request.path %}bg-white/10 text-white{% else %}text-gray-400 hover:text-white hover:bg-white/5{% endif %}">
+                    <span>📚</span> <span>Buku</span>
+                </a>
+                
+                <a href="/peminjaman/" class="flex items-center space-x-3 px-4 py-3 rounded-lg transition font-medium {% if '/peminjaman/' in request.path %}bg-white/10 text-white{% else %}text-gray-400 hover:text-white hover:bg-white/5{% endif %}">
+                    <span>🔁</span> <span>Peminjaman</span>
+                </a>
+                
+                <a href="/siswa/" class="flex items-center space-x-3 px-4 py-3 rounded-lg transition font-medium {% if '/siswa/' in request.path %}bg-white/10 text-white{% else %}text-gray-400 hover:text-white hover:bg-white/5{% endif %}">
+                    <span>👥</span> <span>Siswa (User)</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="p-6 mb-4 mx-4 bg-white/5 rounded-xl">
+            <p class="text-xs text-gray-400">Admin Aktif</p>
+            <p class="font-semibold text-sm">Budi Siregar</p>
+        </div>
+    </aside>
+
+    <main class="flex-1 overflow-y-auto p-8">
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+</body>
+</html>

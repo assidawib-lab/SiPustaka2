@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Daftar Buku - Sipustaka{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex justify-between items-end">
+    <div>
+        <p class="text-sm text-gray-500 uppercase tracking-wider font-semibold">Modul Buku</p>
+        <h2 class="text-3xl font-bold text-gray-800">Daftar Buku</h2>
+    </div>
+    <a href="{% url 'tambah_buku' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium transition flex items-center shadow-sm">
+        <span class="mr-2">+</span> Tambah Buku Baru
+    </a>
+</div>
+
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead class="bg-gray-50/80 text-gray-500 text-sm">
+                <tr>
+                    <th class="py-4 px-6 font-semibold border-b border-gray-100">No</th>
+                    <th class="py-4 px-6 font-semibold border-b border-gray-100">Judul Buku</th>
+                    <th class="py-4 px-6 font-semibold border-b border-gray-100">Pengarang</th>
+                    <th class="py-4 px-6 font-semibold border-b border-gray-100">Kategori</th>
+                    <th class="py-4 px-6 font-semibold border-b border-gray-100">Rak</th>
+                    <th class="py-4 px-6 font-semibold border-b border-gray-100 text-center">Stok</th>
+                    <th class="py-4 px-6 font-semibold border-b border-gray-100 text-center">Aksi</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100 text-sm text-gray-700">
+                {% for buku in data_buku %}
+                <tr class="hover:bg-gray-50/50 transition">
+                    <td class="py-4 px-6">{{ forloop.counter }}</td>
+                    <td class="py-4 px-6 font-bold text-gray-800">{{ buku.judul }}</td>
+                    <td class="py-4 px-6">{{ buku.pengarang }}</td>
+                    <td class="py-4 px-6">
+                        <span class="px-3 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-600 border border-indigo-100">
+                            {{ buku.kategori }}
+                        </span>
+                    </td>
+                    <td class="py-4 px-6 text-gray-500">{{ buku.rak }}</td>
+                    <td class="py-4 px-6 text-center">
+                        <span class="font-bold {% if buku.stok > 0 %}text-emerald-600{% else %}text-red-500{% endif %}">
+                            {{ buku.stok }}
+                        </span>
+                    </td>
+                    <td class="py-4 px-6 text-center">
+                        <div class="flex justify-center space-x-3">
+                            <a href="{% url 'detail_buku' buku.id %}" class="text-blue-500 hover:text-blue-700 font-medium transition">Detail</a>
+                            <span class="text-gray-300">|</span>
+                            <a href="{% url 'edit_buku' buku.id %}" class="text-amber-500 hover:text-amber-700 font-medium transition">Edit</a>
+                            <span class="text-gray-300">|</span>
+                            <a href="{% url 'hapus_buku' buku.id %}" onclick="return confirm('Yakin ingin menghapus buku ini?');" class="text-red-500 hover:text-red-700 font-medium transition">Hapus</a>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="py-8 text-center text-gray-400">
+                        Belum ada data buku di database. Silakan tambah buku baru.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}
